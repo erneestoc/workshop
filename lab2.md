@@ -58,4 +58,4 @@ API docs: http://elixir-lang.org/docs/stable/elixir/
 
 ### Solution ( no peeking :) )
 
-Link to solution.
+See `solution.ex` in the `lab2` branch.
