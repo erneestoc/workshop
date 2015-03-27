@@ -20,7 +20,7 @@ defmodule Chat.Forge do
   end
 
   register :room,
-    __struct__: Chat.Room2
+    __struct__: Chat.Room
 
   register :user,
     __struct__: Chat.User,

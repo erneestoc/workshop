@@ -1,66 +1,50 @@
 defmodule Chat.RoomTest do
   use ExUnit.Case
   use ShouldI
-  import ShouldI.Matchers.Context
+  require Chat.Forge
+  alias Chat.Forge
   alias Chat.Room
 
   with "empty room" do
     setup context do
-      assign context, room: Room.new
+      {:ok, repo} = Chat.Repo.start_link
+
+      assign context,
+        repo: repo,
+        room: Forge.saved_room(repo)
     end
 
-    should_match_key room: %Room{messages: [], members: []}
-
-    with "member bob" do
-      setup context do
-        assign context, room: Room.join(context.room, "bob")
-      end
-
-      should "not be able to join twice", context do
-        assert_raise ArgumentError, "username already taken", fn ->
-          Room.join(context.room, "bob")
-        end
-      end
-
-      # Implement by user
-      should "be able to join room", context do
-        room = Room.join(context.room, "jane")
-        assert "jane" in room.members
-      end
-
-      # Implement by user
-      should "not be able to leave if not already joined", context do
-        assert_raise ArgumentError, "user not in room", fn ->
-          Room.leave(context.room, "jane")
-        end
-      end
-
-      # Implement by user
-      should "be able to leave room", context do
-        room = Room.leave(context.room, "bob")
-        refute "bob" in room.members
-      end
+    should "have no members", context do
     end
 
-    with "members bob, jane and two messages" do
-      # Implement by group
+    with "two members jane and bob" do
       setup context do
-        room = context.room
-               |> Room.join("bob")
-               |> Room.join("jane")
-               |> Room.new_message("bob", "Hi there Jane!")
-               |> Room.new_message("jane", "Bob, how are you?")
-
-        assign context, room: room
+        context
       end
 
-      # Implement by group
-      should_match_key room: %Room{members: ["jane", "bob"]}
+      should "have joined members", context do
+        assert context.jane.room_id == context.room.id
 
-      # Implement by group
-      should "filter messages based on user", context do
-        assert Room.messages_by_user(context.room, "no one") == []
-        assert Room.messages_by_user(context.room, "bob") == ["Hi there Jane!"]
+        assert context.jane in Room.members(context.repo, context.room)
+        assert context.bob in Room.members(context.repo, context.room)
+      end
+
+      with "messages in room" do
+        setup context do
+          context =
+            Forge.having room_id: context.room.id do
+              assign context,
+                bob_msg_1:  Forge.saved_message(context.repo, user_id: context.bob.id),
+                jane_msg_1: Forge.saved_message(context.repo, user_id: context.jane.id),
+                jane_msg_2: Forge.saved_message(context.repo, user_id: context.jane.id)
+            end
+
+          assign context,
+            bob_msg_2: Forge.saved_message(context.repo, user_id: context.bob.id)
+        end
+
+        should "have messages in room", context do
+        end
       end
     end
   end
