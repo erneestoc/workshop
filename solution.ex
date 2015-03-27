@@ -15,13 +15,11 @@ defmodule Chat.RoomTest do
         room: Forge.saved_room(repo)
     end
 
-    # Implement by user
     should "have no members", context do
       assert Room.members(context.repo, context.room) == []
     end
 
     with "two members jane and bob" do
-      # Implement by user
       setup context do
         jane = Forge.saved_user(context.repo)
         jane = Room.join(context.repo, context.room, jane)
@@ -33,7 +31,6 @@ defmodule Chat.RoomTest do
           bob: bob
       end
 
-      # Implement by user
       should "have joined members", context do
         assert context.jane.room_id == context.room.id
 
@@ -55,7 +52,6 @@ defmodule Chat.RoomTest do
             bob_msg_2: Forge.saved_message(context.repo, user_id: context.bob.id)
         end
 
-        # Implement by user
         should "have messages in room", context do
           assert context.bob_msg_1.text in Message.messages_in_room(context.repo, context.room)
           assert context.jane_msg_1.text in Message.messages_in_room(context.repo, context.room)
