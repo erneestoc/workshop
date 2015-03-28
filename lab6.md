@@ -1,4 +1,4 @@
-# LAB4
+# LAB6
 
 ### Lab purpose
 
@@ -7,7 +7,7 @@ In this lab we will use Blacksmith to test models.
 
 ### Lab instructions
 
-Check out the `lab4` branch. In this branch we have provided three basic models,
+Check out the `lab6` branch. In this branch we have provided three basic models,
 `Message`, `User` and `Room`. Study the models because in this lab we are going
 to test them.
 
@@ -40,4 +40,4 @@ API docs: http://elixir-lang.org/docs/stable/elixir/
 
 ### Solution ( no peeking :) )
 
-See `solution.ex` in the `lab3` branch.
+See `solution.ex` in the `lab6` branch.

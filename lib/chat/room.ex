@@ -1,6 +1,10 @@
 defmodule Chat.Room do
   defstruct [:id]
 
+  def new do
+    %Chat.Room{}
+  end
+
   def join(repo, room, user) do
     Chat.Repo.save(repo, %{user | room_id: room.id})
   end
