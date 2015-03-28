@@ -55,6 +55,8 @@ API docs: http://elixir-lang.org/docs/stable/elixir/
 
   5. `Enum.sort/2` http://elixir-lang.org/docs/stable/elixir/Enum.html#sort/2
 
+  6. Map syntax http://elixir-lang.org/docs/master/elixir/Kernel.SpecialForms.html#%{}/1
+
 
 ### Solution ( no peeking :) )
 
