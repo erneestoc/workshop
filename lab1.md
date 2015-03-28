@@ -74,6 +74,8 @@ API docs: http://elixir-lang.org/docs/stable/elixir/
 
   4. `IO.inspect/1` http://elixir-lang.org/docs/master/elixir/IO.html#inspect/2
 
+  5. Map syntax http://elixir-lang.org/docs/master/elixir/Kernel.SpecialForms.html#%{}/1
+
 
 ### Solution ( no peeking :) )
 
