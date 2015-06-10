@@ -3,7 +3,7 @@
 ### Lab purpose
 
 This lab will expand on the second lab. An `Agent` will be used to wrap the room
-state in a a process.
+state in a process.
 
 Some of your code can be reused from the second lab or you can grab the code
 from the file with solutions in the `lab2` branch.
