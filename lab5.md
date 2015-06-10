@@ -34,7 +34,7 @@ Start an interactive shell with the modules in your project available with
 
   1. If there is enough time try to implement the process as a `GenServer` or
      as a normal process with spawn/send/receive. What differences do you notice
-     from the `Agent` version and when would you use one Agent instead of
+     from the `Agent` version and when would you use an Agent instead of
      GenServer?
 
 ### Links
