@@ -27,7 +27,6 @@ defmodule Chat.Forge do
     name: Faker.Name.name,
     created_at: time_now
 
-  # Implement by user
   register :message,
     __struct__: Chat.Message,
     text: Faker.Lorem.sentence,
