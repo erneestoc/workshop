@@ -8,7 +8,7 @@ going to test the chat room created in the previous lab.
 
 ### Lab instructions
 
-The `lab3` branch has a file `room_test.ex` which contains some tests for the
+The `lab3` branch has a file `room_test.exs` which contains some tests for the
 chat room.
 
   1. Implement the test `should be able to join room`. Add a new user to the
