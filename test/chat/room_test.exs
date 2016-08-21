@@ -1,44 +1,35 @@
 defmodule Chat.RoomTest do
   use ExUnit.Case
-  use ShouldI
-  import ShouldI.Matchers.Context
+  use TrueStory
   alias Chat.Room
 
-  with "empty room" do
-    setup context do
-      assign context, room: Room.new
-    end
+  story "new room", c
+    |> new_room(:room1, members: ["jose"], messages: ["Hello"]),
+  verify do
+    assert %Room{} = c.room
+  end
 
-    should_match_key room: %Room{messages: [], members: []}
+  story "add member", c
+    |> new_room(:room1)
+    |> add_member(:room1, "Jose"),
+  verify do
+    assert "Jose" in c.room.members
+  end
 
-    with "member bob" do
-      setup context do
-        assign context, room: Room.join(context.room, "bob")
-      end
+  story "add message", c
+    |> new_room(:room1)
+    |> add_message(:room2, "Hello Joe!"),
+  verify do
+    assert "Hello Joe!" in c.room.messages
+  end
 
-      should "not be able to join twice", context do
-        assert_raise ArgumentError, "username already taken", fn ->
-          Room.join(context.room, "bob")
-        end
-      end
-
-      should "be able to join room", context do
-      end
-
-      should "not be able to leave if not already joined", context do
-      end
-
-      should "be able to leave room", context do
-      end
-    end
-
-    with "members bob, jane and two messages" do
-      setup context do
-        context
-      end
-
-      should "filter messages based on user", context do
-      end
-    end
+  story "add members to multiple rooms", c
+    |> new_room(:room1)
+    |> new_room(:room2)
+    |> add_member(:room1, "Jose")
+    |> add_member(:room2, "James"),
+  verify do
+    assert c.room1.members == ["Jose"]
+    assert c.room2.members == ["James"]
   end
 end
