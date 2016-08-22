@@ -1,24 +1,19 @@
-defmodule Lab5 do
-  def task1 do
-    pid = spawn fn ->
+defmodule Lab4 do
+  def task1(message) do
+    spawn fn ->
       receive do
         string -> IO.puts string
       end
     end
 
-    send pid, "Hello World"
+    send pid, message
   end
 
-  def task2 do
+  def task2() do
     pid = spawn fn ->
       receive do
         {:sum, pid, list} -> send pid, Enum.sum(list)
       end
-    end
-
-    send pid, {:sum, self, 1..10}
-    receive do
-      result -> result
     end
   end
 
